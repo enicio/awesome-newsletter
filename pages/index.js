@@ -1,12 +1,18 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { useState } from 'react'
 import styles from '../styles/Home.module.css'
+import emailjs from '@emailjs/browser';
 
 export default function Home() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [confirmSub, setConfirmSub] = useState(false)
+
+   const templateParams = {
+            name: name,
+            email: email
+        };
+
   const handleSubmit = async(e) => {
     e.preventDefault();
     const body = {name, email}
@@ -32,6 +38,7 @@ export default function Home() {
   }
 
   const resetForm = () => {
+    emailjs.send("service_0g3lqxs","template_80yqdt8",templateParams,'yYPE7ob-EpuXDDnyM');
     setName("");
     setEmail("");
     setConfirmSub(true)
