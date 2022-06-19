@@ -24,7 +24,7 @@ async function createInquiry(req, res) {
         });
         const transporter = nodemailer.createTransport({
             port: 587,
-            host: "smtp.mailgun.org",
+            host: process.env.SMTP_SERVER,
             auth: {
               user: process.env.USER_MAIL,
               pass: process.env.PASSWORD_MAIL,
