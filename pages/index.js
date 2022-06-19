@@ -6,6 +6,7 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [confirmSub, setConfirmSub] = useState(false)
   const handleSubmit = async(e) => {
     e.preventDefault();
     const body = {name, email}
@@ -33,6 +34,7 @@ export default function Home() {
   const resetForm = () => {
     setName("");
     setEmail("");
+    setConfirmSub(true)
   }
 
   return (
@@ -45,6 +47,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>A Newsletter do Jess</h1>
+        {confirmSub? <span>Obrigado por se inscrever</span>:
         <form action="#" method="POST" onSubmit={(e) => handleSubmit(e)} className={styles.formulary}>
           <label htmlFor="name">Nome
             <input
@@ -73,6 +76,7 @@ export default function Home() {
           </label>
           <button type='submit'>Inscrever</button>
         </form>
+         }
       </main>
 
       <footer className={styles.footer}>
