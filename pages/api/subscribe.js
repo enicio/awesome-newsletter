@@ -23,13 +23,12 @@ async function createInquiry(req, res) {
             }
         });
         const transporter = nodemailer.createTransport({
-            port: 465,
-            host: "smtp.gmail.com",
+            port: 587,
+            host: "smtp.mailgun.org",
             auth: {
               user: process.env.USER_MAIL,
               pass: process.env.PASSWORD_MAIL,
             },
-            secure: true,
         });
         const mailData = {
             from: 'jessandro42@gmail.com',
