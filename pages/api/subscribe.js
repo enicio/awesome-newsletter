@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import nodemailer from 'nodemailer';
 
 const prisma = new PrismaClient();
 
@@ -21,6 +22,29 @@ async function createInquiry(req, res) {
                 email: body.email,
             }
         });
+        const transporter = nodemailer.createTransport({
+            port: 465,
+            host: "smtp.gmail.com",
+            auth: {
+              user: process.env.USER_MAIL,
+              pass: process.env.PASSWORD_MAIL,
+            },
+            secure: true,
+        });
+        const mailData = {
+            from: 'jessandro42@gmail.com',
+            to: body.email,
+            subject: `Obrigado por assinar a minha Newsletter`,
+            text: 'Compre uma kombi',
+            html: '<div>Espero enviar algum conteudo toda terça!</div>'
+           }
+           transporter.sendMail(mailData, function (err, info) {
+            if(err)
+              console.log(err)
+            else
+              console.log(info)
+          })
+
         return res.status(200).json(newEntry, {success: true});
     } catch (error) {
         console.error("Request error", error);
