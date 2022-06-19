@@ -38,7 +38,7 @@ export default function Home() {
   }
 
   const resetForm = () => {
-    emailjs.send("service_0g3lqxs","template_80yqdt8",templateParams,'yYPE7ob-EpuXDDnyM');
+    emailjs.send(process.env.NEXT_PUBLIC_SERVICE_ID,process.env.NEXT_PUBLIC_TEMPLATE_ID,templateParams,process.env.NEXT_PUBLIC_PUBLIC_KEY_EMAILJS);
     setName("");
     setEmail("");
     setConfirmSub(true)
