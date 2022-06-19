@@ -7,6 +7,12 @@ export default function Home() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [confirmSub, setConfirmSub] = useState(false)
+
+  const templateParams = {
+          name: name,
+          email: email
+      };
+
   const handleSubmit = async(e) => {
     e.preventDefault();
     const body = {name, email}
@@ -46,12 +52,14 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>A Newsletter do Jess</h1>
+        <h1 className={styles.title}>O que foi do fim de semana</h1>
+        <h2 className={styles.subtitle}>A Newsletter do Jess</h2>
         {confirmSub? <span>Obrigado por se inscrever</span>:
         <form action="#" method="POST" onSubmit={(e) => handleSubmit(e)} className={styles.formulary}>
           <label htmlFor="name">Nome
             <input
               required
+              placeholder='Arthur Dent'
               type="text"
               name="name"
               id="name"
@@ -65,6 +73,7 @@ export default function Home() {
             Email
             <input
               required
+              placeholder='compre@kombi.com.br'
               type="email"
               name="email"
               id="email"
