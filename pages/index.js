@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { useState } from 'react'
 import styles from '../styles/Home.module.css'
+import emailjs from '@emailjs/browser';
 
 export default function Home() {
   const [name, setName] = useState('');
@@ -38,6 +38,7 @@ export default function Home() {
   }
 
   const resetForm = () => {
+    emailjs.send(process.env.NEXT_PUBLIC_SERVICE_ID,process.env.NEXT_PUBLIC_TEMPLATE_ID,templateParams,process.env.NEXT_PUBLIC_PUBLIC_KEY_EMAILJS);
     setName("");
     setEmail("");
     setConfirmSub(true)

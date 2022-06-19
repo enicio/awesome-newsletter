@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 // import nodemailer from 'nodemailer';
-import { SMTPClient } from 'emailjs';
+// import { SMTPClient } from 'emailjs';
+// import emailjs from 'emailjs';
+// import emailjs from '@emailjs/browser';
 
 const prisma = new PrismaClient();
 
@@ -17,12 +19,12 @@ export default async function handler(req, res) {
 async function createInquiry(req, res) {
     const body = req.body;
 
-    const client = new SMTPClient({
-        user: process.env.USER_MAIL,
-        password: process.env.PASSWORD_MAIL,
-        host: 'smtp.gmail.com',
-        ssl:true
-      });
+    // const client = new SMTPClient({
+    //     user: process.env.USER_MAIL,
+    //     password: process.env.PASSWORD_MAIL,
+    //     host: 'smtp.gmail.com',
+    //     ssl:true
+    //   });
 
     try {
         const newEntry = await prisma.users.create({
@@ -32,15 +34,24 @@ async function createInquiry(req, res) {
             }
         });
 
-        client.send(
-            {
-                from: 'jessandro42@gmail.com',
-                to: body.email,
-                subject: `Obrigado por assinar a minha Newsletter`,
-                text: `Espero enviar algum conteudo toda terça!`,
-                html: '<div>Espero enviar algum conteudo toda terça!</div>'
-            }
-            )
+        // const templateParams = {
+        //     name: "jessandro",
+        //     email: "jessandro42@gmail.com"
+        // };
+
+        // emailjs.send(serviceID, templateID, templateParams, publicKey);
+
+        // emailjs.send("service_0g3lqxs","template_80yqdt8",templateParams,'yYPE7ob-EpuXDDnyM');
+
+        // client.send(
+        //     {
+        //         from: 'jessandro42@gmail.com',
+        //         to: body.email,
+        //         subject: `Obrigado por assinar a minha Newsletter`,
+        //         text: `Espero enviar algum conteudo toda terça!`,
+        //         html: '<div>Espero enviar algum conteudo toda terça!</div>'
+        //     }
+        //     )
 
 
 
